@@ -191,10 +191,8 @@ identical(seqlevels(txdb), seqlevels(transcripts))
 ## ---------------------------------------------------------------------
 
 ## Restore seqlevels in a TxDb to original values.
-\dontrun{
 txdb <- restoreSeqlevels(txdb)
 seqlevels(txdb)
-}
 
 ## ---------------------------------------------------------------------
 ## keepStandardChromosomes

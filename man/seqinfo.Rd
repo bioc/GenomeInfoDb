@@ -235,6 +235,10 @@ seqlevels(txdb)
 seqlevels(txdb)[seqlevels(txdb) == "CHM"] <- "M"
 seqlevels(txdb)
 
+## Restore original seqlevels:
+seqlevels(txdb) <- seqlevels0(txdb)
+seqlevels(txdb)
+
 gr <- GRanges(rep(c("chr2", "chr3", "chrM"), 2), IRanges(1:6, 10))
 
 ## Add:
@@ -319,17 +323,7 @@ seqlevels(tx, force=TRUE) <- c("ch3L", "ch3R")
 seqlevels(tx)
 
 ## ---------------------------------------------------------------------
-## E. RESTORE ORIGINAL SEQLEVELS OF A TxDb OBJECT
-## ---------------------------------------------------------------------
-
-## Applicable to TxDb objects only.
-\dontrun{
-seqlevels(txdb) <- seqlevels0(txdb)
-seqlevels(txdb)
-}
-
-## ---------------------------------------------------------------------
-## F. FINDING METHODS
+## E. FINDING METHODS
 ## ---------------------------------------------------------------------
 
 showMethods("seqinfo")
