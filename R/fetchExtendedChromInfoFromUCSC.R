@@ -187,6 +187,14 @@ standard_fetch_extended_ChromInfo_from_UCSC <- function(
 {
     chrominfo <- fetch_ChromInfo_from_UCSC(genome,
                                 goldenPath_url=goldenPath_url)
+    if (genome == "hg19") {
+        ## Get rid of chrMT and the patch sequences from GRCh37.p13 added
+        ## by UCSC in March 2020 so we stick to the original hg19 which was
+        ## based on GRCh37.
+        go_away <- chrominfo$chrom %in% "chrMT" |
+                   grepl("_(fix|alt)$", chrominfo$chrom)
+        chrominfo <- chrominfo[!go_away, ]
+    }
     UCSC_seqlevel <- chrominfo[ , "chrom"]
     circular_idx <- match(circ_seqs, UCSC_seqlevel)
     if (any(is.na(circular_idx)))

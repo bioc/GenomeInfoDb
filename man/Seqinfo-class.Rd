@@ -61,7 +61,13 @@
   \describe{
     \item{}{
       \code{Seqinfo(seqnames, seqlengths=NA, isCircular=NA, genome=NA)}:
-      Creates a Seqinfo object.
+      Creates a Seqinfo object and populate it with the supplied data.
+
+      One special form of calling the \code{Seqinfo()} constructor is
+      to specify only the \code{genome} argument and set it to the name
+      of an UCSC genome (e.g. \code{Seqinfo(genome="hg38")}), in which
+      case the sequence information is fetched from UCSC. See Examples
+      section below for some examples.
     }
   }
 }
@@ -210,26 +216,43 @@
 
 \author{H. Pagès}
 
+\references{
+  See \url{https://groups.google.com/a/soe.ucsc.edu/d/msg/genome-announce/whsRXqNsn24/PP5dSRQGAwAJ} for UCSC's announcement about the massive update they made to hg19 in March 2020.
+}
+
 \seealso{
   \itemize{
     \item \code{\link{seqinfo}}
 
     \item The \code{\link{fetchExtendedChromInfoFromUCSC}} utility
           function that is used behind the scene to make a Seqinfo
-          object for a supported genome (see examples below).
+          object for a supported UCSC genome (see examples below).
   }
 }
 
 \examples{
 ## ---------------------------------------------------------------------
-## A. MAKING A Seqinfo OBJECT FOR A SUPPORTED GENOME
+## A. MAKING A Seqinfo OBJECT FOR A SUPPORTED UCSC GENOME
 ## ---------------------------------------------------------------------
 
+## One special form of calling the 'Seqinfo()' constructor is to specify
+## only the 'genome' argument and set it to the name of an UCSC genome,
+## in which case the sequence information is fetched from UCSC
+## (fetchExtendedChromInfoFromUCSC() is used behind the scene to
+## retrieve the information from UCSC and thus internet access is
+## required). See '?fetchExtendedChromInfoFromUCSC' for the list of
+## UCSC genomes that are currently supported.
+
 if (interactive()) {
-  ## This uses fetchExtendedChromInfoFromUCSC() behind the scene and
-  ## thus requires internet access. See ?fetchExtendedChromInfoFromUCSC
-  ## for the list of UCSC genomes that are currently supported.
   Seqinfo(genome="hg38")
+  ## IMPORTANT NOTE ABOUT hg19: In this version of GenomeInfoDb (which
+  ## is part of BioC 3.10) 'Seqinfo(genome="hg19")' excludes chrMT and
+  ## the patch sequences from the GRCh37.p13 assembly that UCSC added
+  ## to hg19 in March 2020 (see link to UCSC's announcement in the
+  ## References section above). In other words 'Seqinfo(genome="hg19")'
+  ## still returns the 93 sequences that were in the original hg19
+  ## (which was based on GRCh37), and nothing else.
+  Seqinfo(genome="hg19")  # the 93 hg19 original sequences!
   Seqinfo(genome="bosTau8")
   Seqinfo(genome="canFam3")
   Seqinfo(genome="musFur1")

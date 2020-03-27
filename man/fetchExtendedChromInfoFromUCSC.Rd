@@ -12,6 +12,14 @@
   bosTau6, canFam3, canFam2, canFam1, musFur1, mm10, mm9, mm8, susScr3,
   susScr2, rn6, rheMac3, rheMac2, galGal4, galGal3, gasAcu1, danRer7,
   apiMel2, dm6, dm3, ce10, ce6, ce4, ce2, sacCer3, and sacCer2 at the moment.
+
+  IMPORTANT UPDATE ABOUT hg19: \code{fetchExtendedChromInfoFromUCSC("hg19")}
+  excludes chrMT and the patch sequences from the GRCh37.p13 assembly
+  that UCSC added to hg19 in March 2020 (see UCSC's announcement here
+  \url{https://groups.google.com/a/soe.ucsc.edu/d/msg/genome-announce/whsRXqNsn24/PP5dSRQGAwAJ}).
+  In other words, \code{fetchExtendedChromInfoFromUCSC("hg19")} still
+  returns the 93 sequences that were in the original hg19 (which was
+  based on GRCh37), and nothing else.
 }
 
 \usage{
