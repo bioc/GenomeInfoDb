@@ -287,7 +287,7 @@ fetch_table_from_url <- function(url, ...)
 ### This is exported!
 DEFAULT_CIRC_SEQS <- c(
     ## Mitochondrial genome
-    "chrM", "MT", "MtDNA", "mit", "Mito", "mitochondrion",
+    "chrM", "chrMT", "MT", "MtDNA", "mit", "Mito", "mitochondrion",
     "dmel_mitochondrion_genome",
     ## Chloroplast genome
     "Pltd", "ChrC", "Pt", "chloroplast", "Chloro",
@@ -299,7 +299,7 @@ DEFAULT_CIRC_SEQS <- c(
 ### As of Sep 21, 2010 (Ensembl release 59), Ensembl was still not flagging
 ### circular sequences in their db (see this thread for the details
 ### http://lists.ensembl.org/pipermail/dev/2010-September/000139.html),
-### NOT exported but used in the GenomicFeatures package.
+### NOT exported but used in the txdbmaker package.
 make_circ_flags_from_circ_seqs <- function(seqlevels, circ_seqs=NULL)
 {
     if (!is.character(seqlevels))
