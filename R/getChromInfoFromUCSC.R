@@ -321,7 +321,7 @@
     goldenPath.url=getOption("UCSC.goldenPath.url"))
 {
     col2class <- c(ucsc="character", ensembl="character")
-    fetch_table_from_UCSC_database(genome, "ucscToEnsembl",
+    fetch_table_dump_from_UCSC(genome, "ucscToEnsembl",
                      col2class=col2class,
                      goldenPath.url=goldenPath.url)
 }
@@ -333,7 +333,7 @@
     goldenPath.url=getOption("UCSC.goldenPath.url"))
 {
     col2class <- c(ensembl="character", ucsc="character", source="factor")
-    chromAlias <- fetch_table_from_UCSC_database(genome, "chromAlias",
+    chromAlias <- fetch_table_dump_from_UCSC(genome, "chromAlias",
                                    col2class=col2class,
                                    goldenPath.url=goldenPath.url)
     ## Filters and reformats.
@@ -561,16 +561,6 @@
          ENSEMBL_LINKER=ENSEMBL_LINKER)
 }
 
-### Now defined in the UCSCutils package so use that instead and remove this.
-order_organism_genome_pairs <- function(organism, genome)
-{
-    regexpr <- "^(.*[^0-9])([0-9]*)$"
-    genome_basename <- sub(regexpr, "\\1", genome)
-    genome_version <- as.integer(sub(regexpr, "\\2", genome))
-    genome_version[is.na(genome_version)] <- 0L
-    order(organism, genome_basename, genome_version)
-}
-
 registered_UCSC_genomes <- function(organism=NA)
 {
     if (!isSingleStringOrNA(organism))
@@ -627,7 +617,7 @@ registered_UCSC_genomes <- function(organism=NA)
 
     listData <- lapply(setNames(seq_along(colnames), colnames), make_col)
     DF <- S4Vectors:::new_DataFrame(listData, nrows=length(assemblies))
-    oo <- order_organism_genome_pairs(DF$organism, DF$genome)
+    oo <- UCSC.utils:::order_organism_genome_pairs(DF$organism, DF$genome)
     DF <- DF[oo, , drop=FALSE]
     if (!is.na(organism)) {
         keep_idx <- grep(organism, DF$organism, ignore.case=TRUE)

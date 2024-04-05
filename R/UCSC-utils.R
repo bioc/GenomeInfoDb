@@ -5,13 +5,14 @@
 ### Nothing in this file is exported.
 ###
 
+### TODO: Everything in this file should move to the UCSC.utils package.
 
 ### UCSC provides a dump of each genome database at:
 ###   <goldenPath.url>/<genome>/database/
 ### The database tables are dumped as compressed tab-delimited text files.
-### fetch_table_from_UCSC_database() downloads the specified table and
+### fetch_table_dump_from_UCSC() downloads the specified table and
 ### imports it as a data.frame.
-fetch_table_from_UCSC_database <- function(genome, table, col2class,
+fetch_table_dump_from_UCSC <- function(genome, table, col2class,
     goldenPath.url=getOption("UCSC.goldenPath.url"))
 {
     url <- paste(goldenPath.url, genome, "database",
@@ -41,9 +42,9 @@ fetch_table_from_UCSC_database <- function(genome, table, col2class,
     goldenPath.url=getOption("UCSC.goldenPath.url"))
 {
     col2class <- c(chrom="character", size="integer", fileName="NULL")
-    ans <- fetch_table_from_UCSC_database(genome, "chromInfo",
-                                          col2class=col2class,
-                                          goldenPath.url=goldenPath.url)
+    ans <- fetch_table_dump_from_UCSC(genome, "chromInfo",
+                                      col2class=col2class,
+                                      goldenPath.url=goldenPath.url)
     ## Some sanity checks that should never fail.
     in_what <- paste0("\"chromInfo\" table for UCSC genome ", genome)
     .check_chrom_sizes(ans, in_what)

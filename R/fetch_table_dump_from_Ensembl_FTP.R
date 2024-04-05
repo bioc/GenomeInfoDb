@@ -1,5 +1,5 @@
 ### =========================================================================
-### fetch_table_from_Ensembl_FTP()
+### fetch_table_dump_from_Ensembl_FTP()
 ### -------------------------------------------------------------------------
 ###
 ### Nothing in this file is exported.
@@ -91,7 +91,7 @@
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-### fetch_table_from_Ensembl_FTP()
+### fetch_table_dump_from_Ensembl_FTP()
 ###
 ### Fetch a table (.txt.gz file) from one of the core DB dumps located on
 ### the Ensembl FTP server (ftp.ensembl.org).
@@ -129,7 +129,7 @@
 ### The "ftp://" part and trailing slash are both mandatory!
 ### Use get_Ensembl_FTP_core_db_url() defined in Ensembl-utils.R to obtain
 ### such URL for a given species/release/division programmatically.
-fetch_table_from_Ensembl_FTP <-
+fetch_table_dump_from_Ensembl_FTP <-
     function(core_db_url, table, full.colnames=FALSE, nrows=-1L)
 {
     columns <- .ENSEMBLDB_COLUMNS[[table]]
@@ -152,15 +152,16 @@ fetch_table_from_Ensembl_FTP <-
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-### OLD_fetch_table_from_Ensembl_FTP()
+### OLD_fetch_table_dump_from_Ensembl_FTP()
 ###
-### Replaced by fetch_table_from_Ensembl_FTP() above that uses
+### Replaced by fetch_table_dump_from_Ensembl_FTP() above that uses
 ### fetch_table_from_url()'s newly added argument 'remove_CRs' to handle the
 ### carriage return problem found in table dumps from Ensembl release < 99.
 ### TODO: Either get rid of this (and of the soft dep on data.table and
-### R.utils), OR add the 'reader' argument to fetch_table_from_Ensembl_FTP()
-### (choices would be reduced to "read.table" or "fread" only, no more "auto",
-### with default being "read.table").
+### R.utils), OR add the 'reader' argument to
+### fetch_table_dump_from_Ensembl_FTP() (choices would be reduced
+### to "read.table" or "fread" only, no more "auto", with default
+### being "read.table").
 
 .please_install_missing_CRAN_pkgs <- function(pkgs, reader0)
 {
@@ -193,7 +194,7 @@ fetch_table_from_Ensembl_FTP <-
 ### The "ftp://" part and trailing slash are mandatory!
 ### Use get_Ensembl_FTP_core_db_url() defined in Ensembl-utils.R to obtain
 ### such URL for a given species/release/division programmatically.
-OLD_fetch_table_from_Ensembl_FTP <-
+OLD_fetch_table_dump_from_Ensembl_FTP <-
     function(core_db_url, table, full.colnames=FALSE, nrows=-1L,
              reader=c("auto", "read.table", "fread"))
 {

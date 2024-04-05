@@ -570,7 +570,8 @@ get_Ensembl_FTP_core_db_url <- function(species, release=NA, division=NA,
 
 fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
 {
-    coord_system <- fetch_table_from_Ensembl_FTP(core_db_url, "coord_system")
+    coord_system <- fetch_table_dump_from_Ensembl_FTP(core_db_url,
+                                                      "coord_system")
 
     ## Drop rows that do not have the default_version attrib.
     keep_idx <- grep("default_version", coord_system[ , "attrib"], fixed=TRUE)
@@ -597,12 +598,13 @@ fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
 {
     stopifnot(is_primary_key(seq_region_ids))
 
-    all_synonyms <- fetch_table_from_Ensembl_FTP(core_db_url,
-                                                 "seq_region_synonym")
+    all_synonyms <- fetch_table_dump_from_Ensembl_FTP(core_db_url,
+                                                      "seq_region_synonym")
     keep_idx <- which(all_synonyms[ , "seq_region_id"] %in% seq_region_ids)
     synonyms <- S4Vectors:::extract_data_frame_rows(all_synonyms, keep_idx)
 
-    external_dbs <- fetch_table_from_Ensembl_FTP(core_db_url, "external_db")
+    external_dbs <- fetch_table_dump_from_Ensembl_FTP(core_db_url,
+                                                      "external_db")
     synonyms <- join_dfs(synonyms, external_dbs,
                          "external_db_id", "external_db_id",
                          keep.Rcol=TRUE)  # we'll drop it below
@@ -644,7 +646,7 @@ fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
     ##     core_db_url <- GenomeInfoDb:::get_Ensembl_FTP_core_db_url(
     ##                                               "hsapiens",
     ##                                               release=release)
-    ##     attrib_type <- GenomeInfoDb:::fetch_table_from_Ensembl_FTP(
+    ##     attrib_type <- GenomeInfoDb:::fetch_table_dump_from_Ensembl_FTP(
     ##                                               core_db_url,
     ##                                               "attrib_type")
     ##   }
@@ -652,9 +654,9 @@ fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
     ##   http://ftp.ensembl.org/pub/release-89/mysql/homo_sapiens_core_89_38/
     ## e.g. many of them (including dump file for "attrib_type" table) have
     ## extension .gz.bz2 which is a mess!
-    #attrib_type <- fetch_table_from_Ensembl_FTP(core_db_url, "attrib_type",
-    #                                            nrows=99L)
-    attrib_type <- fetch_table_from_Ensembl_FTP(core_db_url, "attrib_type")
+    #attrib_type <- fetch_table_dump_from_Ensembl_FTP(core_db_url,
+    #                                                 "attrib_type", nrows=99L)
+    attrib_type <- fetch_table_dump_from_Ensembl_FTP(core_db_url, "attrib_type")
 
     m <- solid_match(codes, attrib_type[ , "code"],
                      x_what="supplied code",
@@ -673,7 +675,7 @@ fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
         stop(wmsg("'db_names' must be a character vector"))
     if (anyDuplicated(db_names))
         stop(wmsg("'db_names' cannot contain duplicates"))
-    external_db <- fetch_table_from_Ensembl_FTP(core_db_url, "external_db")
+    external_db <- fetch_table_dump_from_Ensembl_FTP(core_db_url, "external_db")
     m <- solid_match(db_names, external_db[ , "db_name"],
                      x_what="supplied db_name",
                      table_what="\"external_db.db_name\" value")
@@ -690,8 +692,8 @@ fetch_default_coord_systems_from_Ensembl_FTP <- function(core_db_url)
 .fetch_attribs_from_Ensembl_FTP <- function(core_db_url, seq_region_ids,
                                             toplevel=FALSE, non_ref=FALSE)
 {
-    all_attribs <- fetch_table_from_Ensembl_FTP(core_db_url,
-                                                "seq_region_attrib")
+    all_attribs <- fetch_table_dump_from_Ensembl_FTP(core_db_url,
+                                                     "seq_region_attrib")
     attrib_type_id <- all_attribs[ , "attrib_type_id"]
     codes <- c("toplevel", "non_ref")
     code2id <- .attrib_type_codes_to_ids_from_Ensembl_FTP(core_db_url, codes)
@@ -726,7 +728,7 @@ fetch_seq_regions_from_Ensembl_FTP <- function(core_db_url,
     coord_systems <- fetch_default_coord_systems_from_Ensembl_FTP(core_db_url)
 
     ## Fetch table "seq_region".
-    seq_regions <- fetch_table_from_Ensembl_FTP(core_db_url, "seq_region")
+    seq_regions <- fetch_table_dump_from_Ensembl_FTP(core_db_url, "seq_region")
 
     ## INNER JOIN table "seq_region" with table "coord_system".
     Rtable <- "coord_system"

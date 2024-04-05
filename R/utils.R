@@ -255,7 +255,7 @@ simple_read_table <- function(file,
     do.call(read.table, args)
 }
 
-### Used by fetch_assembly_report(), fetch_table_from_Ensembl_FTP(),
+### Used by fetch_assembly_report(), fetch_table_dump_from_Ensembl_FTP(),
 ### getChromInfoFromNCBI(), getChromInfoFromUCSC(), and more...
 ### Calling read.table() directly on an URL tends to be unreliable. For
 ### example getChromInfoFromNCBI("CIEA01") was randomly failing for me with
