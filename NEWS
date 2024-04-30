@@ -1,3 +1,16 @@
+CHANGES IN VERSION 1.40.0
+-------------------------
+
+NEW FEATURES
+
+    o Register the following NCBI assemblies:
+
+      - GRCr8 assembly (Rat)
+      - mCavPor4.1 assembly (domestic guinea pig)
+      - 21 Escherichia coli assemblies
+      - a few Petromyzon marinus (sea lamprey) assemblies
+
+
 CHANGES IN VERSION 1.38.0
 -------------------------
 
