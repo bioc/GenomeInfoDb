@@ -14,20 +14,31 @@
 .ENSEMBL_FTP_PUB_GRCH37_URL <- "ftp://ftp.ensembl.org/pub/grch37/"
 .ENSEMBLGENOMES_FTP_PUB_URL <- "ftp://ftp.ensemblgenomes.org/pub/"
 .ENSEMBL_FTP_RELEASE_PREFIX <- "release-"
+.ENSEMBL_DIVISIONS <- c("bacteria", "fungi", "metazoa", "plants", "protists")
 
-### 'division' must be NA or one of the Ensembl Genomes divisions i.e.
-### "bacteria", "fungi", "metazoa", "plants", or "protists".
+.normarg_division <- function(division, use.grch37=FALSE)
+{
+    if (!isSingleStringOrNA(division))
+        stop(wmsg("'division' must be a single string (or NA)"))
+    if (is.na(division))
+        return(NA)
+    if (division == "")
+        stop(wmsg("'division' cannot be the empty string"))
+    if (use.grch37)
+        stop(wmsg("'division' and 'use.grch37' cannot both be specified"))
+    if (!(division %in% .ENSEMBL_DIVISIONS))
+        stop(wmsg("'division' should be one of ",
+                  paste0('"', .ENSEMBL_DIVISIONS, '"', collapse=", ")))
+    division
+}
+
+### 'division' must be NA or one of the Ensembl Genomes divisions.
 .get_Ensembl_FTP_top_url <- function(division=NA, use.grch37=FALSE)
 {
-    if (!is_single_value(division))
-        stop(wmsg("'division' must be a single value"))
     if (!isTRUEorFALSE(use.grch37))
         stop(wmsg("'use.grch37' must be TRUE or FALSE"))
+    division <- .normarg_division(division, use.grch37)
     if (!is.na(division)) {
-        if (!is.character(division) || division == "")
-            stop(wmsg("'division' must be a single non-empty string or NA"))
-        if (use.grch37)
-            stop(wmsg("'division' and 'use.grch37' cannot both be specified"))
         top_url <- paste0(.ENSEMBLGENOMES_FTP_PUB_URL, division, "/")
     } else if (use.grch37) {
         top_url <- .ENSEMBL_FTP_PUB_GRCH37_URL
@@ -37,15 +48,13 @@
     top_url
 }
 
-### 'division' must be NA or one of the Ensembl Genomes divisions i.e.
-### "bacteria", "fungi", "metazoa", "plants", or "protists".
+### 'division' must be NA or one of the Ensembl Genomes divisions.
 get_Ensembl_FTP_mysql_url <- function(release=NA, division=NA,
                                       use.grch37=FALSE)
 {
     if (!is_single_value(release))
         stop(wmsg("'release' must be a single value"))
-    top_url <- .get_Ensembl_FTP_top_url(division=division,
-                                        use.grch37=use.grch37)
+    top_url <- .get_Ensembl_FTP_top_url(division, use.grch37)
     if (!is.na(release)) {
         mysql_subdir <- paste0(.ENSEMBL_FTP_RELEASE_PREFIX, release, "/mysql")
     } else if (is.na(division) && !use.grch37) {
@@ -56,15 +65,13 @@ get_Ensembl_FTP_mysql_url <- function(release=NA, division=NA,
     paste0(top_url, mysql_subdir, "/")
 }
 
-### 'division' must be NA or one of the Ensembl Genomes divisions i.e.
-### "bacteria", "fungi", "metazoa", "plants", or "protists".
+### 'division' must be NA or one of the Ensembl Genomes divisions.
 get_Ensembl_FTP_gtf_url <- function(release=NA, division=NA,
                                     use.grch37=FALSE)
 {
     if (!is_single_value(release))
         stop(wmsg("'release' must be a single value"))
-    top_url <- .get_Ensembl_FTP_top_url(division=division,
-                                        use.grch37=use.grch37)
+    top_url <- .get_Ensembl_FTP_top_url(division, use.grch37)
     if (!is.na(release)) {
         gtf_subdir <- paste0(.ENSEMBL_FTP_RELEASE_PREFIX, release, "/gtf")
     } else if (is.na(division) && !use.grch37) {
@@ -73,6 +80,35 @@ get_Ensembl_FTP_gtf_url <- function(release=NA, division=NA,
         gtf_subdir <- "current/gtf"
     }
     paste0(top_url, gtf_subdir, "/")
+}
+
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### .list_Ensembl_FTP_core_dbs()
+###
+
+### The keys are FTP URLs to "mysql" directories e.g.
+###   "ftp://ftp.ensembl.org/pub/current_mysql/"
+###   "ftp://ftp.ensembl.org/pub/release-98/mysql/"
+###   "ftp://ftp.ensemblgenomes.org/pub/bacteria/current/mysql/"
+###   "ftp://ftp.ensemblgenomes.org/pub/plants/release-45/mysql/"
+### etc...
+.Ensembl_FTP_cached_core_dbs <- new.env(parent=emptyenv())
+
+.list_Ensembl_FTP_core_dbs <- function(mysql_url, release=NA)
+{
+    stopifnot(isSingleString(mysql_url))
+    pattern <- "_core_"
+    core_dbs <- .Ensembl_FTP_cached_core_dbs[[mysql_url]]
+    if (is.null(core_dbs)) {
+        subdirs <- list_ftp_dir(mysql_url, subdirs.only=TRUE)
+        core_dbs <- subdirs[grep(pattern, subdirs, fixed=TRUE)]
+        .Ensembl_FTP_cached_core_dbs[[mysql_url]] <- core_dbs
+    }
+    if (is.na(release))
+        return(core_dbs)
+    pattern <- paste0(pattern, release, "_")
+    core_dbs[grep(pattern, core_dbs, fixed=TRUE)]
 }
 
 
@@ -87,13 +123,13 @@ get_Ensembl_FTP_gtf_url <- function(release=NA, division=NA,
 ### etc...
 .Ensembl_FTP_cached_releases <- new.env(parent=emptyenv())
 
+### 'division' must be NA or one of the Ensembl Genomes divisions.
 .list_Ensembl_FTP_releases <- function(division=NA, use.grch37=FALSE,
                                        as.subdirs=FALSE)
 {
     if (!isTRUEorFALSE(as.subdirs))
         stop(wmsg("'as.subdirs' must be TRUE or FALSE"))
-    top_url <- .get_Ensembl_FTP_top_url(division=division,
-                                        use.grch37=use.grch37)
+    top_url <- .get_Ensembl_FTP_top_url(division, use.grch37)
     releases <- .Ensembl_FTP_cached_releases[[top_url]]
     if (is.null(releases)) {
         top_files <- list_ftp_dir(top_url)
@@ -109,24 +145,33 @@ get_Ensembl_FTP_gtf_url <- function(release=NA, division=NA,
     releases
 }
 
+### 'division' must be NA or one of the Ensembl Genomes divisions.
 get_current_Ensembl_release <- function(division=NA, use.grch37=FALSE)
 {
-    releases <- .list_Ensembl_FTP_releases(division=division,
-                                           use.grch37=use.grch37)
+    releases <- .list_Ensembl_FTP_releases(division, use.grch37)
     current_release <- max(as.integer(releases))
-    ## The latest release is not necessarily **officially** released, in
-    ## which case the corresponding FTP dir is incomplete. The following
-    ## code tries to detect this situation by checking the presence of the
-    ## README file.
-    top_url <- .get_Ensembl_FTP_top_url(division=division,
-                                        use.grch37=use.grch37)
-    README_url <- paste0(top_url, .ENSEMBL_FTP_RELEASE_PREFIX,
-                         current_release, "/README")
-    res <- try(suppressWarnings(
-        download.file(README_url, tempfile(), quiet=TRUE)
-    ), silent=TRUE)
-    if (inherits(res, "try-error"))
-        current_release <- current_release - 1L
+    ## We should be done here. However, sometimes the Ensembl folks create
+    ## FTP folder ftp.ensembl.org/pub/release-<current_release>/ a few days
+    ## before it's officially released. In this case the folder typically
+    ## misses a bunch of subfolders like mysql/. So we check that subfolder
+    ## mysql/ can be listed and contains the right thing.
+    while (TRUE) {
+        mysql_url <- get_Ensembl_FTP_mysql_url(current_release, division,
+                                               use.grch37)
+        core_dbs <- try(suppressWarnings(
+                            .list_Ensembl_FTP_core_dbs(mysql_url)
+                        ), silent=TRUE)
+        if (inherits(core_dbs, "try-error") || length(core_dbs) == 0L) {
+            current_release <- current_release - 1L
+            next
+        }
+        ok <- grepl(paste0("_core_", current_release, "_"), core_dbs)
+        if (!all(ok)) {
+            current_release <- current_release - 1L
+            next
+        }
+        break
+    }
     current_release
 }
 
@@ -142,15 +187,11 @@ use_species_index_from_Ensembl_FTP <- function(release=NA, division=NA,
 {
     if (!is_single_value(release))
         stop(wmsg("'release' must be a single value"))
-    if (!is_single_value(division))
-        stop(wmsg("'division' must be a single value"))
     if (!isTRUEorFALSE(use.grch37))
         stop(wmsg("'use.grch37' must be TRUE or FALSE"))
-    if (use.grch37) {
-        if (is.na(division))
-            return(FALSE)
-        stop(wmsg("'division' and 'use.grch37' cannot both be specified"))
-    }
+    division <- .normarg_division(division, use.grch37)
+    if (use.grch37)
+        return(FALSE)
     if (is.na(release))
         return(TRUE)
     release <- as.integer(release)
@@ -163,7 +204,7 @@ use_species_index_from_Ensembl_FTP <- function(release=NA, division=NA,
 {
     if (!is_single_value(release))
         stop(wmsg("'release' must be a single value"))
-    top_url <- .get_Ensembl_FTP_top_url(division=division)
+    top_url <- .get_Ensembl_FTP_top_url(division)
     if (is.na(division)) {
         ## Available in Ensembl release 96 (March 2019) and above.
         species_file <- "species_EnsemblVertebrates.txt"
@@ -369,11 +410,11 @@ fetch_species_index_from_Ensembl_FTP <- function(release=NA, division=NA)
 ###
 
 .extract_species_info_from_species_index <- function(species_index, idx,
-                                                     release=NA)
+                                                     release=NA, division=NA)
 {
     stopifnot(is_single_value(release))
     if (is.na(release)) {
-        release <- get_current_Ensembl_release()
+        release <- get_current_Ensembl_release(division)
     } else {
         release <- as.integer(release)
     }
@@ -393,7 +434,7 @@ fetch_species_index_from_Ensembl_FTP <- function(release=NA, division=NA)
 {
     stopifnot(is_single_value(release))
     if (is.na(release)) {
-        release <- get_current_Ensembl_release()
+        release <- get_current_Ensembl_release(use.grch37=TRUE)
     } else {
         release <- as.integer(release)
     }
@@ -434,7 +475,8 @@ check_species_info <- function(species_info)
     species_index <- .load_or_fetch_species_index_from_url(url)
     idx <- .lookup_species_in_species_index(species, species_index, url)
     species_info <- .extract_species_info_from_species_index(species_index,
-                                                             idx, release)
+                                                             idx,
+                                                             release, division)
     core_db <- species_info$core_db
     attr(core_db, "species_info") <- species_info
     core_db
@@ -471,35 +513,10 @@ check_species_info <- function(species_info)
     core_db
 }
 
-### The keys are FTP URLs to "mysql" directories e.g.
-###   "ftp://ftp.ensembl.org/pub/current_mysql/"
-###   "ftp://ftp.ensembl.org/pub/release-98/mysql/"
-###   "ftp://ftp.ensemblgenomes.org/pub/bacteria/current/mysql/"
-###   "ftp://ftp.ensemblgenomes.org/pub/plants/release-45/mysql/"
-### etc...
-.Ensembl_FTP_cached_core_dbs <- new.env(parent=emptyenv())
-
-.list_Ensembl_FTP_core_dbs <- function(mysql_url, release=NA)
-{
-    stopifnot(isSingleString(mysql_url))
-
-    pattern <- "_core_"
-    core_dbs <- .Ensembl_FTP_cached_core_dbs[[mysql_url]]
-    if (is.null(core_dbs)) {
-        subdirs <- list_ftp_dir(mysql_url, subdirs.only=TRUE)
-        core_dbs <- subdirs[grep(pattern, subdirs, fixed=TRUE)]
-        .Ensembl_FTP_cached_core_dbs[[mysql_url]] <- core_dbs
-    }
-
-    if (!is.na(release))
-        pattern <- paste0(pattern, release, "_")
-    core_dbs[grep(pattern, core_dbs, fixed=TRUE)]
-}
-
 ### Returns a single string with the "species_info" attribute (named list)
 ### on it.
 .find_core_db_in_Ensembl_FTP_core_dbs <- function(mysql_url, species,
-                                                  release=NA)
+                                                  release=NA, division=NA)
 {
     stopifnot(isSingleString(species))
     core_dbs <- .list_Ensembl_FTP_core_dbs(mysql_url, release=release)
@@ -510,7 +527,7 @@ check_species_info <- function(species_info)
                   "\" species at ", mysql_url))
     core_db <- core_dbs[[idx]]
     if (is.na(release)) {
-        release <- get_current_Ensembl_release()
+        release <- get_current_Ensembl_release(division)
     } else {
         release <- as.integer(release)
     }
@@ -553,7 +570,8 @@ get_Ensembl_FTP_core_db_url <- function(species, release=NA, division=NA,
             ## The old way. Dumb, unreliable, and slow!
             core_db <- .find_core_db_in_Ensembl_FTP_core_dbs(
                                            mysql_url,
-                                           species, release=release)
+                                           species,
+                                           release=release, division=division)
         }
     }
     species_info <- attr(core_db, "species_info")
