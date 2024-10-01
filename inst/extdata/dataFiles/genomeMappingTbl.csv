@@ -27,7 +27,8 @@ armadillo,dasypus novemcinctus,NA,85,Jul.2016,85,Jul.2016,dasNov3,Dec.2011,Broad
 asian bonytongue,scleropages formosus,ASM162426v1,94,Oct.2018,94,Oct.2018,NA,NA,NA
 asian bonytongue,scleropages formosus,fSclFor1.1,99,Jan.2020,99,Jan.2020,NA,NA,NA
 asiatic black bear,ursus thibetanus thibetanus,ASM966005v1,100,Apr.2020,100,Apr.2020,NA,NA,NA
-atlantic herring,clupea harengus,Ch_v2.0.2,98,Sept.2019,98,Sept.2019,NA,NA,NA
+atlantic herring,clupea harengus,Ch_v2.0.2,98,Sept.2019,111,Jan.2024,NA,NA,NA
+atlantic herring,clupea harengus,Ch_v2.0.2v2,112,May.2024,112,May.2024,NA,NA,NA
 atlantic salmon,salmo salar,ICSASG_v2,99,Jan.2020,105,Dec.2020,NA,NA,NA
 atlantic salmon,salmo salar,Ssal_v3.1,106,Apr.2022,106,Apr.2022,NA,NA,NA
 australian saltwater crocodile,crocodylus porosus,CroPor_comp1,96,Apr.2019,96,Apr.2019,NA,NA,NA
@@ -38,7 +39,8 @@ bengalese finch,lonchura striata domestica,LonStrDom1,96,Apr.2019,96,Apr.2019,NA
 bicolor damselfish,stegastes partitus,Stegastes_partitus-1.0.2,94,Oct.2018,94,Oct.2018,NA,NA,NA
 black snub-nosed monkey,rhinopithecus bieti,ASM169854v1,91,Dec.2017,91,Dec.2017,NA,NA,NA
 blind barbel,sinocyclocheilus anshuiensis,SAMN03320099.WGS_v1.1,99,Jan.2020,99,Jan.2020,NA,NA,NA
-blue tilapia,oreochromis aureus,ASM587006v1,99,Jan.2020,99,Jan.2020,NA,NA,NA
+blue tilapia,oreochromis aureus,ASM587006v1,99,Jan.2020,111,Jan.2024,NA,NA,NA
+blue tilapia,oreochromis aureus,ZZ_aureus,112,May.2024,112,May.2024,NA,NA,NA
 blue tit,cyanistes caeruleus,cyaCae2,96,Apr.2019,96,Apr.2019,NA,NA,NA
 blue whale,balaenoptera musculus,mBalMus1.v2,101,Aug.2020,101,Aug.2020,NA,NA,NA
 blue-crowned manakin,lepidothrix coronata,Lepidothrix_coronata-1.0,96,Apr.2019,96,Apr.2019,NA,NA,NA
@@ -77,7 +79,8 @@ cave fish,astyanax mexicanus,Astyanax_mexicanus-2.0,94,Oct.2018,94,Oct.2018,astM
 central bearded dragon,pogona vitticeps,pvi1.1,96,Apr.2019,96,Apr.2019,NA,NA,NA
 chacoan peccary,catagonus wagneri,CatWag_v2_BIUU_UCD,99,Jan.2020,99,Jan.2020,NA,NA,NA
 channel bull blenny,cottoperca gobio,fCotGob3.1,98,Sept.2019,98,Sept.2019,NA,NA,NA
-channel catfish,ictalurus punctatus,IpCoco_1.2,94,Oct.2018,94,Oct.2018,NA,NA,NA
+channel catfish,ictalurus punctatus,IpCoco_1.2,94,Oct.2018,111,Jan.2024,NA,NA,NA
+channel catfish,ictalurus punctatus,ASM400665v3,112,May.2024,112,May.2024,NA,NA,NA
 chicken,gallus gallus,WASHUC2,54,May.2009,54,May.2009,galGal3,May.2006,WUSTL Gallus-gallus-2.1
 chicken,gallus gallus,WASHUC2,54,May.2009,65,Dec.2011,galGal4,Nov.2011,ICGC Gallus-gallus-4.0
 chicken,gallus gallus,Galgal4,71,Apr.2013,82,Sep.2015,galGal4,Nov.2011,ICGC Gallus-gallus-4.0
@@ -100,13 +103,16 @@ chinese hamster PICR,cricetulus griseus,CriGri-PICR,96,Apr.2019,109,Feb.2023,NA,
 chinese hamster PICR,cricetulus griseus,CriGri-PICR-1.0,110,Jul.2023,110,Jul.2023,NA,NA,NA
 chinese medaka,oryzias sinensis,ASM858656v1,100,Apr.2020,100,Apr.2020,NA,NA,NA
 chinese softshell turtle,pelodiscus sinensis,PelSin_1.0,68,Jul.2012,68,Jul.2012,pelSin1,NA,NA
-chinook salmon,oncorhynchus tshawytscha,Otsh_v1.0,100,Apr.2020,100,Apr.2020,NA,NA,NA
+chinook salmon,oncorhynchus tshawytscha,Otsh_v1.0,100,Apr.2020,111,Jan.2024,NA,NA,NA
+chinook salmon,oncorhynchus tshawytscha,Otsh_v2.0,112,May.2024,112,May.2024,NA,NA,NA
 ciona intestinalis,ciona intestinalis,JGI2,54,May.2009,54,May.2009,ci2,Mar.2005,JGI v2.0
 ciona intestinalis,ciona intestinalis,KH,66,Feb.2012,66,Feb.2012,ci2,Mar.2005,JGI v2.0
 ciona savignyi,ciona savignyi,CSAV2.0,54,May.2009,54,May.2009,cioSav2,NA,NA
 climbing perch,anabas testudineus,fAnaTes1.1,94,Oct.2018,94,Oct.2018,NA,NA,NA
-climbing perch,anabas testudineus,FAnaTes1.2,103,Feb.2021,103,Feb.2021,NA,NA,NA
-clown anemonefish,amphiprion ocellaris,AmpOce1.0,94,Oct.2018,94,Oct.2018,NA,NA,NA
+climbing perch,anabas testudineus,FAnaTes1.2,103,Feb.2021,111,Jan.2024,NA,NA,NA
+climbing perch,anabas testudineus,FAnaTes1.3,112,May.2024,112,May.2024,NA,NA,NA
+clown anemonefish,amphiprion ocellaris,AmpOce1.0,94,Oct.2018,111,Jan.2024,NA,NA,NA
+clown anemonefish,amphiprion ocellaris,ASM2253959v1,112,May.2024,112,May.2024,NA,NA,NA
 cod,gadus morhua,gadMor1,65,Dec.2011,65,Dec.2011,gadMor1,May.2010,Genofisk GadMor_May2010
 cod,gadus morhua,gadMor3.0,103,Feb.2021,103,Feb.2021,gadMor1,May.2010,Genofisk GadMor_May2010
 coelacanth,latimeria chalumnae,LatCha1,66,Feb.2012,66,Feb.2012,latCha1,Aug.2011,Broad Institute LatCha1
@@ -136,7 +142,8 @@ damara mole rat,fukomys damarensis,DMR_v1.0,90,Aug.2017,90,Aug.2017,NA,NA,NA
 dark-eyed junco,junco hyemalis,ASM382977v1,96,Apr.2019,96,Apr.2019,NA,NA,NA
 daurian ground squirrel,spermophilus dauricus,ASM240643v1,96,Apr.2019,96,Apr.2019,NA,NA,NA
 degu,octodon degus,OctDeg1.0,90,Aug.2017,90,Aug.2017,octDeg1,NA,NA
-denticle herring,denticeps clupeoides,fDenClu1.1,98,Sept.2019,98,Sept.2019,NA,NA,NA
+denticle herring,denticeps clupeoides,fDenClu1.1,98,Sept.2019,111,Jan.2024,NA,NA,NA
+denticle herring,denticeps clupeoides,FDenClu1.2,112,May.2024,112,May.2024,NA,NA,NA
 dingo,canis lupus dingo,ASM325472v1,95,Jan2019,95,Jan2019,NA,NA,NA
 dog,canis familiaris,CanFam2.0,54,May.2009,54,May.2009,canFam2,May.2005,Broad Institute v2.0
 dog,canis familiaris,CanFam2.0,54,May.2009,64,Sep.2011,canFam3,Sep.2011,Broad Institute v3.1
@@ -155,9 +162,11 @@ duck,anas platyrhynchos,BGI_duck_1.0,73,Sep.2013,95,Jan.2019,anaPlat1,NA,NA
 duck,anas platyrhynchos,CAU_duck1.0,96,Apr.2019,96,Apr.2019,anaPlat1,NA,NA
 eastern brown snake,pseudonaja textilis,EBS10Xv2-PRI,99,Jan.2020,99,Jan.2020,NA,NA,NA
 aastern buzzard,buteo japonicus,ButJap1.0,101,Aug.2020,101,Aug.2020,NA,NA,NA
-eastern happy,astatotilapia calliptera,fAstCal1.2,94,Oct.2018,94,Oct.2018,NA,NA,NA
+eastern happy,astatotilapia calliptera,fAstCal1.2,94,Oct.2018,111,Jan.2024,NA,NA,NA
+eastern happy,astatotilapia calliptera,FAstCal1.3,112,May.2024,112,May.2024,NA,NA,NA
 eastern spot-billed duck,anas zonorhyncha,ASM222487v1,101,Aug.2020,101,Aug.2020,NA,NA,NA
-electric eel,electrophorus electricus,Ee_SOAP_WITH_SSPACE,97,Jul.2019,97,Jul.2019,NA,NA,NA
+electric eel,electrophorus electricus,Ee_SOAP_WITH_SSPACE,97,Jul.2019,111,Jan.2024,NA,NA,NA
+electric eel,electrophorus electricus,fEleEle1.pri,112,May.2024,112,May.2024,NA,NA,NA
 elephant,loxodonta africana,BROADE1,54,May.2009,54,May.2009,NA,NA,NA
 elephant,loxodonta africana,BROADE1,54,May.2009,55,Jul.2009,loxAfr3,Jul.2009,Broad Institute LoxAfr3
 elephant,loxodonta africana,Loxafr3.0,58,May.2010,58,May.2010,loxAfr3,Jul.2009,Broad Institute LoxAfr3
@@ -247,7 +256,8 @@ hybrid-bos indicus,bos indicus x bos taurus,UOA_Brahman_1,97,Jul.2019,97,Jul.201
 hybrid-bos taurus,bos indicus x bos taurus,UOA_Angus_1,97,Jul.2019,97,Jul.2019,NA,NA,NA
 hyrax,procavia capensis,proCap1,54,May.2009,54,May.2009,proCap1,Jul.2008,Baylor College of Medicine HGSC Procap1.0
 indian cobra,naja naja,Nana_v5,101,Aug.2020,101,Aug.2020,NA,NA,NA
-indian glassy fish,parambassis ranga,fParRan2.1,98,Sept.2019,98,Sept.2019,NA,NA,NA
+indian glassy fish,parambassis ranga,fParRan2.1,98,Sept.2019,111,Jan.2024,NA,NA,NA
+indian glassy fish,parambassis ranga,FParRan2.2,112,May.2024,112,May.2024,NA,NA,NA
 indian medaka,oryzias melastigma,Om_v0.7.RACA,94,Oct.2018,94,Oct.2018,NA,NA,NA
 indian peafowl,pavo cristatus,AIIM_Pcri_1.0,99,Jan.2020,99,Jan.2020,NA,NA,NA
 japanese medaka hni,oryzias latipes,ASM223471v1,94,Oct.2018,94,Oct.2018,NA,NA,NA
@@ -326,7 +336,8 @@ new Caledonian crow,corvus moneduloides,bCorMon1.pri,107,Jul.2022,107,Jul.2022,N
 deer mouse,peromyscus maniculatus bairdii,Pman_1.0,90,Aug.2017,95,Jan.2019,perManBai1,NA,NA
 deer mouse,peromyscus maniculatus bairdii,HU_Pman_2.1,96,Apr.2019,96,Apr.2019,perManBai1,NA,NA
 northern pike,esox lucius,Eluc_V3,94,Oct.2018,94,Oct.2018,NA,NA,NA
-northern pike,esox lucius,Eluc_v4,100,Apr.2020,100,Apr.2020,NA,NA,NA
+northern pike,esox lucius,Eluc_v4,100,Apr.2020,111,Jan.2024,NA,NA,NA
+northern pike,esox lucius,fEsoLuc1.pri,112,May.2024,112,May.2024,NA,NA,NA
 northern spotted owl,strix occidentalis caurina,Soccid_v01,101,Aug.2020,101,Aug.2020,NA,NA,NA
 ocean sunfish,mola mola,ASM169857v1,94,Oct.2018,94,Oct.2018,NA,NA,NA
 okarito brown kiwi,apteryx rowi,aptRow1,96,Apr.2019,96,Apr.2019,NA,NA,NA
@@ -377,7 +388,8 @@ rat,rattus norvegicus,Rnor_6.0,80,May.2015,80,May.2015,rn6,Jul.2014,RGSC Rnor_6.
 rat,rattus norvegicus,Rnor_6.0,80,May.2015,105,Dec.2021,rn7,Nov.2020,Wellcome Sanger Institute mRatBN7.2
 rat,rattus norvegicus,mRatBN7.2,106,Apr.2022,106,Apr.2022,rn7,Nov.2020,Wellcome Sanger Institute mRatBN7.2
 red fox,vulpes vulpes,VulVul2.2,95,Jan.2019,95,Jan.2019,NA,NA,NA
-red-bellied piranha,pygocentrus nattereri,Pygocentrus_nattereri-1.0.2,94,Oct.2018,94,Oct.2018,NA,NA,NA
+red-bellied piranha,pygocentrus nattereri,Pygocentrus_nattereri-1.0.2,94,Oct.2018,111,Jan.2024,NA,NA,NA
+red-bellied piranha,pygocentrus nattereri,fPygNat1.pri,112,May.2024,112,May.2024,NA,NA,NA
 reedfish,erpetoichthys calabaricus,fErpCal1.1,98,Sept.2019,98,Sept.2019,NA,NA,NA
 ring-necked pheasant,phasianus colchicus,ASM414374v1,99,Jan.2020,99,Jan.2020,NA,NA,NA
 river trout,salmo trutta,fSalTru1.1,99,Jan.2020,99,Jan.2020,NA,NA,NA
@@ -392,7 +404,9 @@ yeast,saccharomyces cerevisiae,EF3,63,Jun.2011,63,Jun.2011,sacCer3,Apr.2011,SGD 
 yeast,saccharomyces cerevisiae,EF4,65,Dec.2011,65,Dec.2011,sacCer3,Apr.2011,SGD June 2011 sequence
 yeast,saccharomyces cerevisiae,R64-1-1,75,Feb.2014,75,Feb.2014,sacCer3,Apr.2011,SGD June 2011 sequence
 sailfin molly,poecilia latipinna,P_latipinna-1.0,94,Oct.2018,94,Oct.2018,NA,NA,NA
-sheep,ovis aries,Oar_v3.1,74,Dec.2013,74,Dec.2013,oviAri3,Aug.2012,ISGC Oar_v3.1
+sheep,ovis aries,Oar_v3.1,74,Dec.2013,100,Apr.2020,oviAri3,Aug.2012,ISGC Oar_v3.1
+sheep,ovis aries,Oar_rambouillet_v1.0,101,Aug.2020,110,Jul.2023,oviAri3,Aug.2012,ISGC Oar_v3.1
+sheep,ovis aries,ARS-UI_Ramb_v2.0,111,Jan.2024,112,May.2024,oviAri3,Aug.2012,ISGC Oar_v3.1
 sheepshead minnow,cyprinodon variegatus,C_variegatus-1.0,94,Oct.2018,94,Oct.2018,NA,NA,NA
 shortfin molly,poecilia mexicana,P_mexicana-1.0,94,Oct.2018,94,Oct.2018,NA,NA,NA
 shrew,sorex araneus,sorAra1,54,May.2009,54,May.2009,sorAra2,Aug.2008,Broad Institute SorAra2.0
@@ -413,7 +427,8 @@ squirrel,ictidomys tridecemlineatus,speTri1,54,May.2009,65,Dec.2011,speTri2,Nov.
 squirrel,ictidomys tridecemlineatus,spetri2,67,May.2012,67,May.2012,speTri2,Nov.2011,Broad Institute SpeTri2.0
 squirrel,ictidomys tridecemlineatus,SpeTri2.0,90,Aug.2017,90,Aug.2017,speTri2,Nov.2011,Broad Institute SpeTri2.0
 steppe mouse,mus spicilegus,MUSP714,96,Apr.2019,96,Apr.2019,NA,NA,NA
-stickleback,gasterosteus aculeatus,BROADS1,54,May.2009,54,May.2009,gasAcu1,Feb.2006,Broad Institute Release 1.0
+stickleback,gasterosteus aculeatus,BROADS1,54,May.2009,111,Jan.2024,gasAcu1,Feb.2006,Broad Institute Release 1.0
+stickleback,gasterosteus aculeatus,Gaculeatus_UGA_version5,112,May.2024,112,May.2024,gasAcu1,Feb.2006,Broad Institute Release 1.0
 superb fairywren,malurus cyaneus samueli,mCya_1.0,101,Aug.2020,101,Aug.2020,NA,NA,NA
 swainson's thrush,catharus ustulatus,bCatUst1.pri,101,Aug.2020,101,Aug.2020,NA,NA,NA
 swamp eel,monopterus albus,M_albus_1.0,94,Oct.2018,94,Oct.2018,NA,NA,NA
