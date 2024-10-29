@@ -1,3 +1,12 @@
+CHANGES IN VERSION 1.42.0
+-------------------------
+
+BUG FIXES
+
+    o Use more robust heuristic in internal helper
+      get_current_Ensembl_release().
+
+
 CHANGES IN VERSION 1.40.0
 -------------------------
 
