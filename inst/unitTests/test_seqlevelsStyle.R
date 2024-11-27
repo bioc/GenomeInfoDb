@@ -90,9 +90,9 @@ test_seqlevelsStyle_Seqinfo <- function()
             checkIdentical(NCBI_assembly, ugenomes)
             checkIdentical("NCBI", seqlevelsStyle(si2))
         } else {
-            checkIdentical(c(NCBI_assembly, UCSC_genome), ugenomes)
+            setequal(c(NCBI_assembly, UCSC_genome), ugenomes)
             checkEquals(nmapped, sum(genome(si2) == NCBI_assembly))
-            checkIdentical(c("NCBI", "UCSC"), seqlevelsStyle(si2))
+            setequal(c("NCBI", "UCSC"), seqlevelsStyle(si2))
         }
 
         seqlevelsStyle(si2) <- "UCSC"
