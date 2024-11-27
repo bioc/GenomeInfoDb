@@ -153,6 +153,7 @@ test_seqlevelsStyle_Seqinfo <- function()
         list("ce6",      "WS190",                         7L,    0L,      0L),
         list("ce10",     "WBcel215",                      7L,    0L,      0L),
         list("ce11",     "WBcel235",                      7L,    0L,      0L),
+        list("criGri1",  "C_griseus_v1.0",            52710L,    1L,      0L),
         list("danRer7",  "Zv9",                        1133L,    0L,      0L),
         list("danRer10", "GRCz10",                     1061L,    0L,      0L),
         list("danRer11", "GRCz11",                     1923L,    0L,      0L),
