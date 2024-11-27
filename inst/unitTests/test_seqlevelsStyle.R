@@ -90,9 +90,9 @@ test_seqlevelsStyle_Seqinfo <- function()
             checkIdentical(NCBI_assembly, ugenomes)
             checkIdentical("NCBI", seqlevelsStyle(si2))
         } else {
-            setequal(c(NCBI_assembly, UCSC_genome), ugenomes)
+            checkTrue(setequal(c(NCBI_assembly, UCSC_genome), ugenomes))
             checkEquals(nmapped, sum(genome(si2) == NCBI_assembly))
-            setequal(c("NCBI", "UCSC"), seqlevelsStyle(si2))
+            checkTrue(setequal(c("NCBI", "UCSC"), seqlevelsStyle(si2)))
         }
 
         seqlevelsStyle(si2) <- "UCSC"
@@ -251,9 +251,9 @@ test_seqlevelsStyle_Seqinfo <- function()
         style <- seqlevelsStyle(si3)
         if (UCSC_nunmapped == 0L) {
             checkTrue(identical("RefSeq", style) ||
-                      identical(c("RefSeq", "NCBI"), style))
+                      setequal(c("RefSeq", "NCBI"), style))
         } else {
-            checkIdentical(c("RefSeq", "UCSC"), style)
+            checkTrue(setequal(c("RefSeq", "UCSC"), style))
         }
         has_changed <- seqnames(si3) != seqnames(si2)
         ## UGLY HACK! We need to special-case hg38 because it contains 2
