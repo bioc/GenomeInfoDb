@@ -62,17 +62,22 @@ lookup_tax_id_by_organism <- function(organism)
     stopifnot(is.character(organism) || is.factor(organism),
               length(organism) == 1L)
     if (is.na(organism)) return(NA)
+
     taxdb <- loadTaxonomyDb()
-    species <- taxdb[["species"]]
-    organisms <- trimws(paste(taxdb[["genus"]], species))
-    organism <- gsub(" {2,}", " ", organism)
-    organism <- gsub(",", " ", organism, fixed=TRUE)
+    genus <- tolower(trimws(taxdb[ , "genus"]))
+    species <- tolower(trimws(taxdb[ , "species"]))
+    organisms <- trimws(paste(genus, species))
+
+    ## Clean a little bit the user-supplied 'organism'.
+    organism <- gsub(",", " ", tolower(organism), fixed=TRUE)
+    organism <- gsub(" {2,}", " ", trimws(organism))
+
     idx <- match(organism, organisms)
     if (is.na(idx))
         stop(wmsg(organism, ": unknown organism. ",
-                  "Please use 'loadTaxonomyDb()' to see viable ",
-                  "genus/species and taxonomy IDs."))
-    as.integer(taxdb[["tax_id"]][[idx]])
+                  "Please use 'GenomeInfoDb::loadTaxonomyDb()' to see ",
+                  "viable genus/species and taxonomy IDs."))
+    as.integer(taxdb[idx, "tax_id"])
 }
 
 ### NOT exported but used in the GenomicFeatures package.
